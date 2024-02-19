@@ -9,6 +9,16 @@ function addToCart(seat, seatClass, price) {
   const cart = document.getElementById("cart");
 
   const index = selectedSeats.indexOf(seat);
+  console.log(selectedSeatsCount);
+  if(selectedSeatsCount === 3){
+    document.getElementById("cupon").disabled = false;
+    document.getElementById("Button").disabled = false;
+  }
+  else{
+    document.getElementById("cupon").disabled = true;
+    document.getElementById("Button").disabled = true;
+    
+  }
 
   if (index === -1) {
     if (selectedSeatsCount < 4) {
@@ -65,8 +75,9 @@ function cuponHandler() {
   const Button = document.getElementById("Button");
 
   const grandTotalElement = document.getElementById("grandTotal");
+  
 
-  if (inputValue === "NEW15" && selectedSeatsCount == 4) {
+  if (inputValue === "NEW15" && selectedSeatsCount === 4) {
     Button.removeAttribute("disabled");
     const grandTotal =
       selectedSeatsCount * 550 - (selectedSeatsCount * 550 * 0.15).toFixed(2);
@@ -103,13 +114,19 @@ function testHandler() {
   const finalSubmitButton = document.getElementById("finalSubmit");
   const modal = document.getElementById("modal");
   const main = document.getElementById("main");
+  
   if (!isNaN(number) && number > 0 && selectedSeatsCount > 0) {
     finalSubmitButton.removeAttribute("disabled");
+    // document.getElementById("finalSubmit").disabled = false;
+
     modal.style.display = "block";
     main.style.display = "none";
+    const homeSection = document.getElementById('home-screen');
+    homeSection.classList.add('hidden');
     console.log(number);
   } else {
     finalSubmitButton.setAttribute("disabled");
+    // document.getElementById("finalSubmit").disabled = true;
     console.log("Invalid number");
   }
 }
